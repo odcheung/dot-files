@@ -1,5 +1,5 @@
 set nocompatible
-filetype on 
+filetype on
 syntax on
 set nu
 set noswapfile
@@ -21,7 +21,7 @@ Plugin 'tpope/vim-fugitive'
 "Filesystem
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'kien/ctrlp.vim' 
+Plugin 'kien/ctrlp.vim'
 
 "Colors!!!
 Plugin 'altercation/vim-colors-solarized'
@@ -30,6 +30,7 @@ Plugin 'jnurmine/Zenburn'
 "Python Bundles
 Plugin 'nvie/vim-flake8'
 Plugin 'klen/rope-vim'
+Plugin 'fboender/bexec'
 
 "Code Folding Bundles
 Plugin 'tmhedberg/SimpylFold'
@@ -48,7 +49,7 @@ call vundle#end()
 
 "[NERDTree] <-------------------------------------------
 ""Auto-start NERDTree on vim startup
-autocmd vimenter * NERDTree 
+autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in:") | NERDTree | endif
 
@@ -63,11 +64,13 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 "[Key Bindings] <-------------------------------------------
 nmap <leader>nf :NERDTreeFind<CR>
 nmap <leader>nm :NERDTreeToggle<CR>
-nmap <leader>fr :w<cr>:!./%<CR>
 nmap <leader>fs :%s/\s\+$//e<CR> :w<CR>
 nmap <leader>fw :%s/\s\+$//e<CR>
-
 imap jj <Esc>
+
+nmap <leader>fc :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+map <F2> :bprevious<CR>
+map <F3> :bnext<CR>
 
 "[Key Bindings] <-------------------------------------------
 
@@ -76,10 +79,10 @@ imap jj <Esc>
 let g:UltiSnipsExpandTrigger           = '<tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
-"runtime path is the search path for the snippet folder 
+"runtime path is the search path for the snippet folder
 set runtimepath+=/Users/ottocheung/.vim/vim-snippets
 let g:UltiSnipsSnippetsDir='/Users/ottocheung/.vim/vim-snippets/custom'
-let g:UltiSnipsSnippetDirectories=['UltiSnips','custom'] 
+let g:UltiSnipsSnippetDirectories=['UltiSnips','custom']
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsListSnippets="<C-j>"
 let g:UltiSnipsEnableSnipMate=0
@@ -99,7 +102,7 @@ filetype plugin indent on    " enables filetype detection
 let g:SimpylFold_docstring_preview = 1
 
 "python with virtualenv support
-py << EOF
+py3 << EOF
 import os.path
 import sys
 import vim
@@ -150,7 +153,7 @@ set backspace=indent,eol,start
 "Folding based on indentation:
 autocmd FileType python set foldmethod=syntax
 "use space to open folds
-nnoremap <space> za 
+nnoremap <space> za
 "----------Stop python PEP 8 stuff--------------
 
 "js stuff"
